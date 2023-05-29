@@ -7,12 +7,14 @@ function App() {
   return (
     <>
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/search' element={<AnimeSearch />} />
-        </Routes>
-      </BrowserRouter>
+      <div className='container mx-auto'>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/search' element={<AnimeSearch />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   );
 }
