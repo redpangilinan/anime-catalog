@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type Anime = {
   mal_id: number;
@@ -14,6 +15,7 @@ type Anime = {
   };
   episodes: number;
   score: number;
+  type: string;
 };
 
 type AnimeTableProps = {
@@ -65,16 +67,26 @@ const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
                 )}
               </td>
               <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
-                {anime.title}
+                <Link to={`/anime/${anime.mal_id}`}>{anime.title}</Link>
               </td>
               <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                 {anime.aired.string || 'N/A'}
               </td>
               <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                {anime.episodes || 'N/A'}
+                {anime.type || 'N/A'} ({anime.episodes || 'N/A'} eps)
               </td>
               <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                {anime.score || 'N/A'}
+                <span
+                  className={`${
+                    typeof anime.score === 'number'
+                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                      : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                  } text-sm font-medium mr-2 px-2.5 py-0.5 rounded`}
+                >
+                  {typeof anime.score === 'number'
+                    ? anime.score.toFixed(2)
+                    : 'N/A'}
+                </span>
               </td>
             </tr>
           ))}
