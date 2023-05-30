@@ -16,6 +16,7 @@ type Anime = {
   };
   episodes: number;
   score: number;
+  type: string;
 };
 
 const AnimeSearch: React.FC = () => {
@@ -34,6 +35,12 @@ const AnimeSearch: React.FC = () => {
     }
   };
 
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className='px-2'>
       <h1 className='text-2xl font-bold my-4'>Anime Search</h1>
@@ -43,6 +50,7 @@ const AnimeSearch: React.FC = () => {
           placeholder='Enter anime name'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyUp={handleKeyPress}
           className='px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500'
         />
         <button

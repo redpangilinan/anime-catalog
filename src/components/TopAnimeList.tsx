@@ -19,6 +19,7 @@ type Anime = {
   };
   episodes: number;
   score: number;
+  type: string;
 };
 
 const TopAnimeList: React.FC = () => {
@@ -92,7 +93,9 @@ const TopAnimeList: React.FC = () => {
               className='relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
             >
               <span className='sr-only'>Previous</span>
-              <FontAwesomeIcon icon={faArrowLeft} />
+              <span className='px-2'>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </span>
             </button>
           )}
           {renderPagination()}
@@ -103,7 +106,9 @@ const TopAnimeList: React.FC = () => {
               className='relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'
             >
               <span className='sr-only'>Next</span>
-              <FontAwesomeIcon icon={faArrowRight} />
+              <span className='px-2'>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </span>
             </button>
           )}
         </nav>
