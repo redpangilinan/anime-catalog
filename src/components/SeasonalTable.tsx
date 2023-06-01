@@ -25,7 +25,7 @@ type AnimeTableProps = {
 
 const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
   return (
-    <div className='overflow-x-auto w-full'>
+    <div className='overflow-hidden w-full'>
       <table className='w-full divide-y divide-gray-200'>
         <thead className='bg-gray-200'>
           <tr>
