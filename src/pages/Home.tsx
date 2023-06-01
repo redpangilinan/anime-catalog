@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import SeasonalAnime from '../components/SeasonalAnime';
 import TopAiringAnime from '../components/TopAiringAnime';
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className='px-4 pb-5'>
       <div className='grid gap-1 lg:gap-4 grid-cols-1 lg:grid-cols-3'>

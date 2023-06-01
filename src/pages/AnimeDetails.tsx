@@ -72,6 +72,7 @@ const AnimeDetails: React.FC = () => {
         const data = await response.json();
         setAnime(data.data);
         setEntries(data.data.relations);
+        window.scrollTo(0, 0);
       } catch (error) {
         console.error('Error fetching anime details:', error);
       }
