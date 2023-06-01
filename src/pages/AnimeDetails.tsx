@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import AnimeRelations from '../components/AnimeRelations';
 import AnimeCharacters from '../components/AnimeCharacters';
+import AnimeRecommendations from '../components/AnimeRecommendations';
 
 type Anime = {
   mal_id: number;
@@ -43,19 +45,33 @@ type Anime = {
   }>;
 };
 
+type Entry = {
+  mal_id: number;
+  type: string;
+  name: string;
+  url: string;
+};
+
+type AnimeEntry = {
+  relation: string;
+  entry: Entry[];
+};
+
 const AnimeDetails: React.FC = () => {
   const { animeId } = useParams();
   const [anime, setAnime] = useState<Anime | null>(null);
+  const [entries, setEntries] = useState<AnimeEntry[]>([]);
 
   useEffect(() => {
     const fetchAnimeDetails = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 350));
         const response = await fetch(
-          `https://api.jikan.moe/v4/anime/${animeId}`
+          `https://api.jikan.moe/v4/anime/${animeId}/full`
         );
         const data = await response.json();
         setAnime(data.data);
+        setEntries(data.data.relations);
       } catch (error) {
         console.error('Error fetching anime details:', error);
       }
@@ -83,10 +99,10 @@ const AnimeDetails: React.FC = () => {
             />
           </div>
           <h4 className='text-lg font-bold mb-1'>Genres</h4>
-          <div className='flex flex-wrap'>
+          <div className='grid grid-cols-3 gap-2'>
             {anime.genres.map((genre) => (
               <div
-                className='bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300'
+                className='bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300'
                 key={genre.mal_id}
               >
                 {genre.name}
@@ -150,7 +166,10 @@ const AnimeDetails: React.FC = () => {
             {anime.background ||
               'No background information has been added to this title.'}
           </p>
+          <h4 className='text-lg font-bold mt-4 mb-1'>Relations</h4>
+          <AnimeRelations data={entries} />
           <AnimeCharacters />
+          <AnimeRecommendations />
         </div>
         <div className='min-w-max'>
           <h4 className='text-lg font-bold mb-2 lg:hidden'>Trailer</h4>
