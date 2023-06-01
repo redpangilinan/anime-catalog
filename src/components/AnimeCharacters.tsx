@@ -23,7 +23,7 @@ const AnimeCharacters: React.FC = () => {
   useEffect(() => {
     const fetchCharacterDetails = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 400));
+        await new Promise((resolve) => setTimeout(resolve, 350));
         const response = await fetch(
           `https://api.jikan.moe/v4/anime/${animeId}/characters`
         );

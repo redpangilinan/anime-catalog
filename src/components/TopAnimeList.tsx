@@ -30,6 +30,7 @@ const TopAnimeList: React.FC = () => {
   useEffect(() => {
     const fetchTopAnime = async () => {
       try {
+        await new Promise((resolve) => setTimeout(resolve, 350));
         const response = await axios.get(
           `https://api.jikan.moe/v4/top/anime?page=${currentPage}&limit=25`
         );

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import AnimeTable from '../components/AnimeTable';
+import { useSearchParams } from 'react-router-dom';
 
 type Anime = {
   mal_id: number;
@@ -20,26 +21,38 @@ type Anime = {
 };
 
 const AnimeSearch: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Anime[]>([]);
+  const [params, setParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(params.get('q') || '');
 
-  const handleSearch = async () => {
+  const handleSearch = useCallback(async () => {
     try {
       const response = await axios.get(
         `https://api.jikan.moe/v4/anime?q=${searchTerm}&sfw`
       );
       const { data } = response.data;
+      setParams({ q: searchTerm });
       setSearchResults(data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [searchTerm, setParams]);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleSearch();
     }
   };
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      handleSearch();
+    }, 350);
+
+    return () => {
+      clearTimeout(delay);
+    };
+  }, [params, handleSearch]);
 
   return (
     <div className='px-2'>
@@ -62,7 +75,7 @@ const AnimeSearch: React.FC = () => {
       </div>
 
       {searchResults.length > 0 ? (
-        <AnimeTable data={searchResults} /> // Render the AnimeTable component with searchResults as data
+        <AnimeTable data={searchResults} />
       ) : (
         <p className='text-center'>No results found.</p>
       )}
