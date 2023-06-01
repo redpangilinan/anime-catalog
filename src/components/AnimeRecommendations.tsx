@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 type Entries = {
   entry: {
@@ -25,11 +26,10 @@ const Animeentries: React.FC = () => {
     const fetchentryacterDetails = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 1500));
-        const response = await fetch(
+        const response = await axios.get(
           `https://api.jikan.moe/v4/anime/${animeId}/recommendations`
         );
-        const data = await response.json();
-        setEntries(data.data);
+        setEntries(response.data.data);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching entryacter details:', error);

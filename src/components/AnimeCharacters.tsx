@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 type Characters = {
   character: {
@@ -25,11 +26,10 @@ const AnimeCharacters: React.FC = () => {
     const fetchCharacterDetails = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        const response = await fetch(
+        const response = await axios.get(
           `https://api.jikan.moe/v4/anime/${animeId}/characters`
         );
-        const data = await response.json();
-        setCharacters(data.data);
+        setCharacters(response.data.data);
         setIsLoading(false);
       } catch (error) {
         console.error('Error fetching character details:', error);
