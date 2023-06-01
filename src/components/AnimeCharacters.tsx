@@ -64,35 +64,14 @@ const AnimeCharacters: React.FC = () => {
 
   return (
     <>
-      <div className='flex justify-between mt-4 mb-2'>
-        <h4 className='text-lg font-bold'>Characters</h4>
-        {characters.length > 5 && (
-          <div>
-            {showAll ? (
-              <button
-                className='text-sm text-neutral-600 dark:text-neutral-200 underline'
-                onClick={toggleShowAll}
-              >
-                Show Less
-              </button>
-            ) : (
-              <button
-                className='text-sm text-neutral-600 dark:text-neutral-200 underline'
-                onClick={toggleShowAll}
-              >
-                Show More
-              </button>
-            )}
-          </div>
-        )}
-      </div>
-      <div className='flex flex-wrap gap-3'>
+      <h4 className='text-lg font-bold mt-4 mb-2'>Characters</h4>
+      <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-3'>
         {(showAll ? characters : characters.slice(0, 5)).map((char) => (
           <div
             key={char.character.mal_id}
-            className='block rounded-lg w-40 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700'
+            className='block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700'
           >
-            <div className='relative overflow-hidden bg-cover bg-no-repeat h-56'>
+            <div className='relative overflow-hidden bg-cover bg-no-repeat h-52'>
               <img
                 className='rounded-t-lg'
                 src={char.character.images.jpg.image_url}
@@ -111,6 +90,25 @@ const AnimeCharacters: React.FC = () => {
           </div>
         ))}
       </div>
+      {characters.length > 5 && (
+        <div className='p-3 flex justify-center sm:justify-end'>
+          {showAll ? (
+            <button
+              className='text-sm text-neutral-600 dark:text-neutral-200 underline'
+              onClick={toggleShowAll}
+            >
+              Show Less
+            </button>
+          ) : (
+            <button
+              className='text-sm text-neutral-600 dark:text-neutral-200 underline'
+              onClick={toggleShowAll}
+            >
+              Show More
+            </button>
+          )}
+        </div>
+      )}
     </>
   );
 };

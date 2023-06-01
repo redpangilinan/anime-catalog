@@ -16,7 +16,7 @@ type Entries = {
   };
 };
 
-const Animeentries: React.FC = () => {
+const AnimeRecommendations: React.FC = () => {
   const { animeId } = useParams();
   const [entries, setEntries] = useState<Entries[]>([]);
   const [showAll, setShowAll] = useState(false);
@@ -64,35 +64,14 @@ const Animeentries: React.FC = () => {
 
   return (
     <>
-      <div className='flex justify-between mt-4 mb-2'>
-        <h4 className='text-lg font-bold'>Recommendations</h4>
-        {entries.length > 5 && (
-          <div>
-            {showAll ? (
-              <button
-                className='text-sm text-neutral-600 dark:text-neutral-200 underline'
-                onClick={toggleShowAll}
-              >
-                Show Less
-              </button>
-            ) : (
-              <button
-                className='text-sm text-neutral-600 dark:text-neutral-200 underline'
-                onClick={toggleShowAll}
-              >
-                Show More
-              </button>
-            )}
-          </div>
-        )}
-      </div>
-      <div className='flex flex-wrap gap-3'>
+      <h4 className='text-lg font-bold mt-4 mb-2'>Recommendations</h4>
+      <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-3'>
         {(showAll ? entries : entries.slice(0, 5)).map((entry) => (
           <div
             key={entry.entry.mal_id}
-            className='block rounded-lg w-40 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700'
+            className='block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700'
           >
-            <div className='relative overflow-hidden bg-cover bg-no-repeat h-56'>
+            <div className='relative overflow-hidden bg-cover bg-no-repeat h-52'>
               <Link to={`/anime/${entry.entry.mal_id}`}>
                 <img
                   className='rounded-t-lg'
@@ -103,7 +82,7 @@ const Animeentries: React.FC = () => {
               </Link>
             </div>
             <div className='p-3'>
-              <h5 className='mb-1 font-medium leading-tight text-neutral-800 dark:text-neutral-50'>
+              <h5 className='mb-1 font-medium leading-tight text-neutral-800 dark:text-neutral-50 line-clamp-2'>
                 <Link to={`/anime/${entry.entry.mal_id}`}>
                   {entry.entry.title}
                 </Link>
@@ -112,8 +91,27 @@ const Animeentries: React.FC = () => {
           </div>
         ))}
       </div>
+      {entries.length > 5 && (
+        <div className='p-3 flex justify-center sm:justify-end'>
+          {showAll ? (
+            <button
+              className='text-sm text-neutral-600 dark:text-neutral-200 underline'
+              onClick={toggleShowAll}
+            >
+              Show Less
+            </button>
+          ) : (
+            <button
+              className='text-sm text-neutral-600 dark:text-neutral-200 underline'
+              onClick={toggleShowAll}
+            >
+              Show More
+            </button>
+          )}
+        </div>
+      )}
     </>
   );
 };
 
-export default Animeentries;
+export default AnimeRecommendations;
