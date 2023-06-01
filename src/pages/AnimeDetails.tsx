@@ -99,7 +99,7 @@ const AnimeDetails: React.FC = () => {
             />
           </div>
           <h4 className='text-lg font-bold mb-1'>Genres</h4>
-          <div className='grid grid-cols-3 gap-2'>
+          <div className='grid grid-cols-2 gap-2'>
             {anime.genres.map((genre) => (
               <div
                 className='bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300'
