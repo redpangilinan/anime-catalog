@@ -63,7 +63,7 @@ const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
                     className='w-16 h-auto object-cover rounded-lg'
                   />
                 ) : (
-                  <p className='text-red-500'>Invalid image URL</p>
+                  <p>N/A</p>
                 )}
               </td>
               <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
