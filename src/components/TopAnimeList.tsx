@@ -8,6 +8,7 @@ import AnimeTable from './AnimeTable';
 type Anime = {
   mal_id: number;
   rank: number;
+  popularity: number;
   title: string;
   images: {
     jpg: {
@@ -22,7 +23,11 @@ type Anime = {
   type: string;
 };
 
-const TopAnimeList: React.FC = () => {
+type TopType = {
+  type: string;
+};
+
+const TopAnimeList: React.FC<TopType> = ({ type }) => {
   const [topAnime, setTopAnime] = useState<Anime[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -80,8 +85,7 @@ const TopAnimeList: React.FC = () => {
   return (
     <div className='px-2'>
       <h1 className='text-2xl font-bold my-4'>Top Anime</h1>
-      <AnimeTable data={topAnime} />
-
+      <AnimeTable data={topAnime} type={type} />
       <div className='flex justify-center mt-4'>
         <nav
           className='relative z-0 inline-flex rounded-md shadow-sm -space-x-px mb-3'
