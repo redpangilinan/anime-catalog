@@ -1,7 +1,7 @@
 import TopAnimeList from '../components/TopAnimeList';
 
-const Home = () => {
+const Rankings = () => {
   return <TopAnimeList type='rank' />;
 };
 
-export default Home;
+export default Rankings;

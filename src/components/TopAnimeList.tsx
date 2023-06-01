@@ -36,9 +36,16 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
     const fetchTopAnime = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 350));
+        let popular = '';
+
+        if (type === 'popularity') {
+          popular = 'filter=bypopularity&';
+        }
+
         const response = await axios.get(
-          `https://api.jikan.moe/v4/top/anime?page=${currentPage}&limit=25`
+          `https://api.jikan.moe/v4/top/anime?${popular}page=${currentPage}&limit=25`
         );
+
         const { data, pagination } = response.data;
         setTopAnime(data);
         setTotalPages(pagination.last_visible_page);
@@ -48,7 +55,7 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
     };
 
     fetchTopAnime();
-  }, [currentPage]);
+  }, [currentPage, type]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -84,7 +91,9 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
 
   return (
     <div className='px-2'>
-      <h1 className='text-2xl font-bold my-4'>Top Anime</h1>
+      <h1 className='text-xl font-bold my-4'>
+        {type === 'rank' ? 'Highest Rated Anime' : 'Most Popular Anime'}
+      </h1>
       <AnimeTable data={topAnime} type={type} />
       <div className='flex justify-center mt-4'>
         <nav
