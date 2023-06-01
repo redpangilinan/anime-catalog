@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 type Anime = {
   mal_id: number;
   rank: number;
+  popularity: number;
   title: string;
   images: {
     jpg: {
@@ -20,16 +21,17 @@ type Anime = {
 
 type AnimeTableProps = {
   data: Anime[];
+  type: string;
 };
 
-const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
+const AnimeTable: React.FC<AnimeTableProps> = ({ data, type }) => {
   return (
     <div className='overflow-x-auto w-full'>
       <table className='min-w-full divide-y divide-gray-200'>
         <thead className='bg-gray-100'>
           <tr>
             <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-              Rank
+              {type === 'rank' ? 'Rank' : 'Popularity'}
             </th>
             <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
               Image
@@ -52,7 +54,7 @@ const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
           {data.map((anime) => (
             <tr key={anime.mal_id}>
               <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                {anime.rank || 'N/A'}
+                {type === 'rank' ? anime.rank || 'N/A' : anime.popularity}
               </td>
               <td className='px-6 py-4 whitespace-nowrap'>
                 {anime.images.jpg &&
