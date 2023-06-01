@@ -6,6 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 type Anime = {
   mal_id: number;
   rank: number;
+  popularity: number;
   title: string;
   images: {
     jpg: {
@@ -75,7 +76,7 @@ const AnimeSearch: React.FC = () => {
       </div>
 
       {searchResults.length > 0 ? (
-        <AnimeTable data={searchResults} />
+        <AnimeTable data={searchResults} type='rank' />
       ) : (
         <p className='text-center'>No results found.</p>
       )}
