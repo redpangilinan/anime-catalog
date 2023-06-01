@@ -53,6 +53,15 @@ const AnimeCharacters: React.FC = () => {
     );
   }
 
+  if (characters.length === 0) {
+    return (
+      <div>
+        <h4 className='text-lg font-bold mt-4 mb-2'>Characters</h4>
+        <p>No characters.</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className='flex justify-between mt-4 mb-2'>

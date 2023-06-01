@@ -28,6 +28,10 @@ const AnimeEntries: React.FC<AnimeEntriesProps> = ({ data }) => {
     fetchEntryDetails();
   });
 
+  if (entries.length === 0) {
+    return <div>No relations.</div>;
+  }
+
   return (
     <div>
       <table className='border-collapse w-full'>

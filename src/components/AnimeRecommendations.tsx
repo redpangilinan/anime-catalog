@@ -53,6 +53,15 @@ const Animeentries: React.FC = () => {
     );
   }
 
+  if (entries.length === 0) {
+    return (
+      <div>
+        <h4 className='text-lg font-bold mt-4 mb-2'>Recommendations</h4>
+        <p>No recommendations.</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className='flex justify-between mt-4 mb-2'>
