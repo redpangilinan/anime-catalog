@@ -13,6 +13,16 @@ export default function Footer() {
               </a>
             </li>
             <li>
+              <a href='/rankings' className='mr-4 hover:underline md:mr-6 '>
+                Rankings
+              </a>
+            </li>
+            <li>
+              <a href='/popular' className='mr-4 hover:underline md:mr-6 '>
+                Popular
+              </a>
+            </li>
+            <li>
               <a href='/search' className='mr-4 hover:underline md:mr-6'>
                 Search
               </a>
