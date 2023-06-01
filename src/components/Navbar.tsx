@@ -60,6 +60,9 @@ export default function Navbar() {
                 <a href='/'>Home</a>
               </li>
               <li className='text-gray-600 hover:text-blue-600'>
+                <a href='/ranking'>Ranking</a>
+              </li>
+              <li className='text-gray-600 hover:text-blue-600'>
                 <a href='/search'>Search</a>
               </li>
             </ul>
