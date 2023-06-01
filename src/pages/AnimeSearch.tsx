@@ -57,7 +57,7 @@ const AnimeSearch: React.FC = () => {
 
   return (
     <div className='px-2'>
-      <h1 className='text-2xl font-bold my-4'>Anime Search</h1>
+      <h1 className='text-xl font-bold my-4'>Anime Search</h1>
       <div className='flex justify-center space-x-4 mb-4'>
         <input
           type='text'

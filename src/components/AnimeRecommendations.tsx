@@ -24,7 +24,7 @@ const Animeentries: React.FC = () => {
   useEffect(() => {
     const fetchentryacterDetails = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 1500));
         const response = await fetch(
           `https://api.jikan.moe/v4/anime/${animeId}/recommendations`
         );
