@@ -50,6 +50,7 @@ const AnimeDetails: React.FC = () => {
   useEffect(() => {
     const fetchAnimeDetails = async () => {
       try {
+        await new Promise((resolve) => setTimeout(resolve, 400));
         const response = await fetch(
           `https://api.jikan.moe/v4/anime/${animeId}`
         );
