@@ -121,7 +121,7 @@ const AnimeDetails: React.FC = () => {
         <div className='w-full'>
           <div className='overflow-x-auto w-full'>
             <table className='min-w-full divide-y divide-gray-200 border mb-2'>
-              <thead className='bg-gray-100'>
+              <thead className='bg-gray-200'>
                 <tr>
                   <th className='px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider'>
                     Rank
@@ -172,29 +172,40 @@ const AnimeDetails: React.FC = () => {
           <AnimeRecommendations />
         </div>
         <div className='min-w-max'>
-          <h4 className='text-lg font-bold mb-2 lg:hidden'>Trailer</h4>
           {anime.trailer.youtube_id && (
-            <div className='aspect-w-16 aspect-h-9 mb-4'>
-              <iframe
-                title='Trailer'
-                src={`https://www.youtube.com/embed/${anime.trailer.youtube_id}`}
-                allowFullScreen
-                className='w-full h-full'
-              ></iframe>
+            <div>
+              <h4 className='text-lg font-bold mb-2 lg:hidden'>Trailer</h4>
+              <div className='aspect-w-16 aspect-h-9 mb-4'>
+                <iframe
+                  title='Trailer'
+                  src={`https://www.youtube.com/embed/${anime.trailer.youtube_id}`}
+                  allowFullScreen
+                  className='w-full h-full'
+                ></iframe>
+              </div>
             </div>
           )}
           <h4 className='text-lg font-bold mb-1'>Producers</h4>
-          <ul>
-            {anime.producers.map((producer) => (
-              <li key={producer.mal_id}>{producer.name}</li>
-            ))}
-          </ul>
+          {anime.producers.length > 0 ? (
+            <ul>
+              {anime.producers.map((producer) => (
+                <li key={producer.mal_id}>{producer.name}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No producers available.</p>
+          )}
+
           <h4 className='text-lg font-bold mt-4 mb-1'>Studios</h4>
-          <ul>
-            {anime.studios.map((studio) => (
-              <li key={studio.mal_id}>{studio.name}</li>
-            ))}
-          </ul>
+          {anime.studios.length > 0 ? (
+            <ul>
+              {anime.studios.map((studio) => (
+                <li key={studio.mal_id}>{studio.name}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No studios available.</p>
+          )}
         </div>
       </div>
     </div>
