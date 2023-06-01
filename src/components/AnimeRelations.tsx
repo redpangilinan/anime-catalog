@@ -34,11 +34,11 @@ const AnimeEntries: React.FC<AnimeEntriesProps> = ({ data }) => {
 
   return (
     <div>
-      <table className='border-collapse w-full'>
+      <table className='border-collapse w-full bg-white'>
         <thead>
           <tr>
-            <th className='p-2 border'>Relation</th>
-            <th className='p-2 border'>Name</th>
+            <th className='p-2 border text-left'>Relation</th>
+            <th className='p-2 border text-left'>Name</th>
           </tr>
         </thead>
         <tbody>

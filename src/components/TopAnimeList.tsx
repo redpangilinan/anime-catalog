@@ -100,7 +100,6 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
           className='relative z-0 inline-flex rounded-md shadow-sm -space-x-px mb-3'
           aria-label='Pagination'
         >
-          {/* Previous button code */}
           {currentPage > 1 && (
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -113,7 +112,6 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
             </button>
           )}
           {renderPagination()}
-          {/* Next button code */}
           {currentPage < totalPages && (
             <button
               onClick={() => handlePageChange(currentPage + 1)}
