@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import CardSkeletonLoaders from './CardSkeletonLoaders';
 
 type Characters = {
   character: {
@@ -45,12 +46,7 @@ const AnimeCharacters: React.FC = () => {
   };
 
   if (isLoading) {
-    return (
-      <div>
-        <h4 className='text-lg font-bold mt-4 mb-2'>Characters</h4>
-        <p>Loading...</p>
-      </div>
-    );
+    return <CardSkeletonLoaders title='Characters' />;
   }
 
   if (characters.length === 0) {

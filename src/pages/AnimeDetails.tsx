@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import AnimeRelations from '../components/AnimeRelations';
 import AnimeCharacters from '../components/AnimeCharacters';
 import AnimeRecommendations from '../components/AnimeRecommendations';
+import CardSkeletonLoaders from '../components/CardSkeletonLoaders';
 
 type Anime = {
   mal_id: number;
@@ -82,7 +85,96 @@ const AnimeDetails: React.FC = () => {
   }, [animeId]);
 
   if (!anime) {
-    return <div className='w-full p-6 text-center'>Loading...</div>;
+    return (
+      <div className='p-6'>
+        <h2 className='text-xl font-bold mb-4 text-center lg:text-left'>
+          <Skeleton width={300} />
+        </h2>
+        <div className='flex flex-col lg:flex-row gap-5'>
+          <div className='min-w-max'>
+            <div className='flex justify-center'>
+              <Skeleton className='w-64 h-96 object-cover mb-4' />
+            </div>
+            <h4 className='text-lg font-bold mb-1'>Genres</h4>
+            <div className='grid grid-cols-2 gap-2'>
+              {Array.from({ length: 2 }).map((_, index) => (
+                <div
+                  className='rounded-full dark:bg-blue-900 dark:text-blue-300'
+                  key={index}
+                >
+                  <Skeleton />
+                </div>
+              ))}
+            </div>
+            <h4 className='text-lg font-bold mt-4 mb-1'>Information</h4>
+            <Skeleton count={7} />
+          </div>
+          <div className='w-full'>
+            <div className='overflow-x-auto w-full'>
+              <table className='min-w-full divide-y divide-gray-200 border mb-2'>
+                <thead className='bg-gray-200'>
+                  <tr>
+                    <th className='px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      Rank
+                    </th>
+                    <th className='px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      Popularity
+                    </th>
+                    <th className='px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      Favorites
+                    </th>
+                    <th className='px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      Score
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className='bg-white divide-y divide-gray-200'>
+                  <tr>
+                    <td className='p-3 text-center'>
+                      <Skeleton />
+                    </td>
+                    <td className='p-3 text-center'>
+                      <Skeleton />
+                    </td>
+                    <td className='p-3 text-center'>
+                      <Skeleton />
+                    </td>
+                    <td className='p-3 text-center'>
+                      <Skeleton />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h4 className='text-lg font-bold mt-4 mb-1'>Synopsis</h4>
+            <p className='text-gray-700'>
+              <Skeleton count={6} />
+              <Skeleton width='40%' />
+            </p>
+            <h4 className='text-lg font-bold mt-4 mb-1'>Background</h4>
+            <p className='text-gray-700'>
+              <Skeleton count={2} />
+            </p>
+            <h4 className='text-lg font-bold mt-4 mb-1'>Relations</h4>
+            <Skeleton count={4} />
+            <CardSkeletonLoaders title='Characters' />
+            <CardSkeletonLoaders title='Relations' />
+          </div>
+          <div className='min-w-max'>
+            <div>
+              <h4 className='text-lg font-bold mb-2 lg:hidden'>Trailer</h4>
+              <div className='aspect-w-16 aspect-h-9 mb-4'>
+                <Skeleton height={140} width={300} />
+              </div>
+            </div>
+            <h4 className='text-lg font-bold mb-1'>Producers</h4>
+            <Skeleton count={2} />
+            <h4 className='text-lg font-bold mt-4 mb-1'>Studios</h4>
+            <Skeleton />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

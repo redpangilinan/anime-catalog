@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import CardSkeletonLoaders from './CardSkeletonLoaders';
 
 type Entries = {
   entry: {
@@ -45,12 +46,7 @@ const AnimeRecommendations: React.FC = () => {
   };
 
   if (isLoading) {
-    return (
-      <div>
-        <h4 className='text-lg font-bold mt-4 mb-2'>Recommendations</h4>
-        <p>Loading...</p>
-      </div>
-    );
+    return <CardSkeletonLoaders title='Recommendations' />;
   }
 
   if (entries.length === 0) {

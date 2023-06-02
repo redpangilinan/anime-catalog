@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import AnimeTable from './AnimeTable';
 
 type Anime = {
@@ -31,6 +33,7 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
   const [topAnime, setTopAnime] = useState<Anime[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTopAnime = async () => {
@@ -49,8 +52,10 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
         const { data, pagination } = response.data;
         setTopAnime(data);
         setTotalPages(pagination.last_visible_page);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
       }
     };
 
@@ -60,6 +65,66 @@ const TopAnimeList: React.FC<TopType> = ({ type }) => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  if (isLoading) {
+    return (
+      <div className='px-2'>
+        <h1 className='text-xl font-bold my-4'>
+          {type === 'rank' ? 'Highest Rated Anime' : 'Most Popular Anime'}
+        </h1>
+        <div className='overflow-x-auto w-full'>
+          <table className='min-w-full divide-y divide-gray-200'>
+            <thead className='bg-gray-200'>
+              <tr>
+                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  {type === 'rank' ? 'Rank' : 'Popularity'}
+                </th>
+                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  Image
+                </th>
+                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  Name
+                </th>
+                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  Date Aired
+                </th>
+                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  Episodes
+                </th>
+                <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                  Score
+                </th>
+              </tr>
+            </thead>
+            <tbody className='bg-white divide-y divide-gray-200'>
+              {Array.from({ length: 25 }).map((_, index) => (
+                <tr key={index}>
+                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <Skeleton className='animate-pulse' width={50} />
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap'>
+                    <Skeleton className='animate-pulse' />
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                    <Skeleton className='animate-pulse' />
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <Skeleton className='animate-pulse' />
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <Skeleton className='animate-pulse' />
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                    <Skeleton className='animate-pulse' />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 
   const renderPagination = () => {
     const paginationRange = 5; // Maximum number of pages to display at a time

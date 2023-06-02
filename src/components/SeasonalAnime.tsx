@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 type Entries = {
   mal_id: number;
@@ -23,7 +25,7 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchentryacterDetails = async () => {
+    const fetchEntryDetails = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 1500));
         const response = await axios.get(
@@ -32,12 +34,12 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
         setEntries(response.data.data);
         setIsLoading(false);
       } catch (error) {
-        console.error('Error fetching entryacter details:', error);
+        console.error('Error fetching entry details:', error);
         setIsLoading(false);
       }
     };
 
-    fetchentryacterDetails();
+    fetchEntryDetails();
   }, [type]);
 
   const toggleShowAll = () => {
@@ -46,12 +48,28 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
 
   if (isLoading) {
     return (
-      <div>
+      <>
         <h1 className='text-xl font-bold mt-5 mb-2'>
           {type === 'now' ? 'Seasonal Anime' : 'Upcoming Anime'}
         </h1>
-        <p>Loading...</p>
-      </div>
+        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3'>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <div
+              key={index}
+              className='block react-loading-skeleton rounded-lg bg-white shadow-md dark:bg-neutral-700'
+            >
+              <div className='relative overflow-hidden bg-cover bg-no-repeat h-56 lg:h-72'>
+                <Skeleton className='animate-pulse' height='100%' />
+              </div>
+              <div className='p-3'>
+                <Skeleton className='animate-pulse' />
+                <div className='m-2' />
+                <Skeleton className='animate-pulse' />
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
     );
   }
 
@@ -75,7 +93,7 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
         {(showAll ? entries : entries.slice(0, 8)).map((entry) => (
           <div
             key={entry.mal_id}
-            className='block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700'
+            className='block rounded-lg bg-white shadow-md dark:bg-neutral-700'
           >
             <div className='relative overflow-hidden bg-cover bg-no-repeat h-56 lg:h-72'>
               <Link to={`/anime/${entry.mal_id}`}>
