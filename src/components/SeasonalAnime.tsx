@@ -56,7 +56,7 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
           {Array.from({ length: 8 }).map((_, index) => (
             <div
               key={index}
-              className='block react-loading-skeleton rounded-lg bg-white shadow-md dark:bg-neutral-700'
+              className='block react-loading-skeleton rounded-lg bg-white shadow-md'
             >
               <div className='relative overflow-hidden bg-cover bg-no-repeat h-56 lg:h-72'>
                 <Skeleton className='animate-pulse' height='100%' />
@@ -93,7 +93,7 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
         {(showAll ? entries : entries.slice(0, 8)).map((entry) => (
           <div
             key={entry.mal_id}
-            className='block rounded-lg bg-white shadow-md dark:bg-neutral-700'
+            className='block rounded-lg bg-white shadow-md'
           >
             <div className='relative overflow-hidden bg-cover bg-no-repeat h-56 lg:h-72'>
               <Link to={`/anime/${entry.mal_id}`}>
@@ -106,7 +106,7 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
               </Link>
             </div>
             <div className='p-3'>
-              <h5 className='mb-1 font-medium leading-tight text-neutral-800 dark:text-neutral-50 line-clamp-2'>
+              <h5 className='mb-1 font-medium leading-tight text-neutral-800 line-clamp-2'>
                 <Link to={`/anime/${entry.mal_id}`}>{entry.title}</Link>
               </h5>
             </div>
@@ -117,14 +117,14 @@ const SeasonalAnime: React.FC<SeasonalType> = ({ type }) => {
         <div className='p-3 flex justify-center sm:justify-end'>
           {showAll ? (
             <button
-              className='text-sm text-neutral-600 dark:text-neutral-200 underline'
+              className='text-sm text-neutral-600 underline'
               onClick={toggleShowAll}
             >
               Show Less
             </button>
           ) : (
             <button
-              className='text-sm text-neutral-600 dark:text-neutral-200 underline'
+              className='text-sm text-neutral-600 underline'
               onClick={toggleShowAll}
             >
               Show More

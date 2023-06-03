@@ -98,10 +98,7 @@ const AnimeDetails: React.FC = () => {
             <h4 className='text-lg font-bold mb-1'>Genres</h4>
             <div className='grid grid-cols-2 gap-2'>
               {Array.from({ length: 2 }).map((_, index) => (
-                <div
-                  className='rounded-full dark:bg-blue-900 dark:text-blue-300'
-                  key={index}
-                >
+                <div className='rounded-full' key={index}>
                   <Skeleton />
                 </div>
               ))}
@@ -195,7 +192,7 @@ const AnimeDetails: React.FC = () => {
           <div className='grid grid-cols-2 gap-2'>
             {anime.genres.map((genre) => (
               <div
-                className='bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300'
+                className='bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full'
                 key={genre.mal_id}
               >
                 {genre.name}
@@ -239,8 +236,8 @@ const AnimeDetails: React.FC = () => {
                     <span
                       className={`${
                         typeof anime.score === 'number'
-                          ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                          : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                          ? 'bg-blue-100 text-blue-800'
+                          : 'bg-red-100 text-red-800'
                       } text-sm font-medium mr-2 px-2.5 py-0.5 rounded`}
                     >
                       {typeof anime.score === 'number'

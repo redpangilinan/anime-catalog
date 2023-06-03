@@ -81,8 +81,8 @@ const AnimeTable: React.FC<AnimeTableProps> = ({ data, type }) => {
                 <span
                   className={`${
                     typeof anime.score === 'number'
-                      ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
-                      : 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300'
+                      ? 'bg-blue-100 text-blue-800'
+                      : 'bg-red-100 text-red-800'
                   } text-sm font-medium mr-2 px-2.5 py-0.5 rounded`}
                 >
                   {typeof anime.score === 'number'
