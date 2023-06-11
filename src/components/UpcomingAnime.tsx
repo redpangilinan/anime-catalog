@@ -6,7 +6,7 @@ type Entries = {
   mal_id: number;
   url: string;
   images: {
-    jpg: {
+    webp: {
       image_url: string;
     };
   };
@@ -91,7 +91,7 @@ const SeasonalAnime: React.FC = () => {
               <Link to={`/anime/${entry.mal_id}`}>
                 <img
                   className='rounded-t-lg'
-                  src={entry.images.jpg.image_url}
+                  src={entry.images.webp.image_url}
                   alt={entry.title}
                   width='100%'
                 />

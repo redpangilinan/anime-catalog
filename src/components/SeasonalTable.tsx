@@ -7,7 +7,7 @@ type Anime = {
   popularity: number;
   title: string;
   images: {
-    jpg: {
+    webp: {
       image_url: string;
     };
   };
@@ -41,10 +41,10 @@ const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
           {data.map((anime) => (
             <tr key={anime.mal_id}>
               <td className='px-6 py-4'>
-                {anime.images.jpg &&
-                anime.images.jpg.image_url.endsWith('.jpg') ? (
+                {anime.images.webp &&
+                anime.images.webp.image_url.endsWith('.webp') ? (
                   <img
-                    src={anime.images.jpg.image_url}
+                    src={anime.images.webp.image_url}
                     alt={anime.title}
                     className='w-16 h-auto object-cover rounded-lg'
                   />

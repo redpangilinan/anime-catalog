@@ -8,7 +8,7 @@ type Characters = {
     mal_id: number;
     url: string;
     images: {
-      jpg: {
+      webp: {
         image_url: string;
       };
     };
@@ -70,7 +70,7 @@ const AnimeCharacters: React.FC = () => {
             <div className='relative overflow-hidden bg-cover bg-no-repeat h-52'>
               <img
                 className='rounded-t-lg'
-                src={char.character.images.jpg.image_url}
+                src={char.character.images.webp.image_url}
                 alt={char.character.name}
                 width='100%'
               />
