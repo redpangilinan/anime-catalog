@@ -9,7 +9,7 @@ type Anime = {
   popularity: number;
   title: string;
   images: {
-    jpg: {
+    webp: {
       image_url: string;
     };
   };

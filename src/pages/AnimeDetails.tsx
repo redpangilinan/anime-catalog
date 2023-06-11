@@ -12,7 +12,7 @@ type Anime = {
   rank: number;
   title: string;
   images: {
-    jpg: {
+    webp: {
       image_url: string;
     };
   };
@@ -183,7 +183,7 @@ const AnimeDetails: React.FC = () => {
         <div className='min-w-max'>
           <div className='flex justify-center'>
             <img
-              src={anime.images.jpg.image_url}
+              src={anime.images.webp.image_url}
               alt={anime.title}
               className='w-64 h-96 object-cover mb-4'
             />
