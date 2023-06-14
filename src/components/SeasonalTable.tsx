@@ -19,11 +19,11 @@ type Anime = {
   type: string;
 };
 
-type AnimeTableProps = {
+type SeasonalTableProps = {
   data: Anime[];
 };
 
-const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
+const SeasonalTable: React.FC<SeasonalTableProps> = ({ data }) => {
   return (
     <div className='overflow-hidden w-full'>
       <table className='w-full divide-y divide-gray-200'>
@@ -68,4 +68,4 @@ const AnimeTable: React.FC<AnimeTableProps> = ({ data }) => {
   );
 };
 
-export default AnimeTable;
+export default SeasonalTable;
